@@ -1,0 +1,22 @@
+{% extends  'emprunt/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.adherent| as_crispy_field}}
+    {{ form.livre| as_crispy_field}}
+    {{ form.date_emprunt|as_crispy_field}}
+    {{ form.date_retour|as_crispy_field}}
+    {{ form.date_retour_prevue|as_crispy_field}}
+    
+    <div class='row'>
+        <div class='col-md-7'>
+            <button type='submit' class='btn btn-success btn-block btn-lg' >Submit</button>
+        </div>
+        <div class='col-md-5'>
+            <a href="{% url 'emprunt_list' %}" class='btn btn-secondary btn-block btn-lg'>Back To List</a>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

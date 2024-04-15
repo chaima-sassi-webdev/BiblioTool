@@ -1,0 +1,25 @@
+
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques</title>
+</head>
+<body>
+    <h1>Statistiques</h1>
+
+    <h2>Histogramme des Livres les Plus Empruntés (LPE)</h2>
+    <img src="{% static 'statistiques/images/histogramme_livres_plus_empruntes.png' %}" alt="Histogramme des livres les plus empruntés">
+
+
+    <h2>Histogramme des emprunts par classe (EC)</h2>
+    <img src="{% static 'statistiques/images/histogramme_emprunts_par_classe.png' %}" alt="Histogramme des emprunts par classe">
+    <p></p>
+</body>
+</html>
+
+{% endblock %}
+

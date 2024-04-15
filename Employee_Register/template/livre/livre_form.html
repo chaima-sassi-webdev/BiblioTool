@@ -1,0 +1,21 @@
+{% extends  'livre/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.code_livre| as_crispy_field}}
+    {{ form.Titre_livre| as_crispy_field}}
+    {{ form.Nbre_page|as_crispy_field}}
+    {{ form.exemplaires|as_crispy_field}}
+    {{ form.disponible|as_crispy_field}}
+    {{ form.Nom_auteur|as_crispy_field}}
+<div class='row'>
+    <div class='col-md-7'>
+        <button type='submit' class='btn btn-success btn-block btn-lg'>Submit</button>
+    </div>
+    <div class='col-md-5'>
+        <a href="{% url 'livre_list' %}" class='btn btn-secondary btn-block btn-lg'>Back To List</a>
+    </div>
+</div>
+</form>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'adherent/base.html' %}
+
+{% block content %}
+<table class='table table-borderless'>
+    <thead class='border-bottom font-weight-bold'>
+        <tr>
+            <td>CODE</td>
+            <td>NOM</td>
+            <td>NOMBRE D'EMPRUNTES</td>
+            <td>
+                 <a href="{% url 'adherent_insert' %}" class='btn btn-success btn-block btn-lg'>ADD</a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for adherent in adherent_list %}
+        <tr>
+            <td>{{ adherent.code_adh }}</td>
+            <td>{{ adherent.nom_adh }}</td>
+            <td>{{ adherent.nbrEmprunts_adh }}</td>
+            <td>
+                <a href="{% url 'adherent_update' adherent.id %}" class='btn btn-primary btn-block'>EDIT</a>
+                <!-- Utilisez un modal ou une confirmation JavaScript pour confirmer la suppression -->
+                <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDelete{{ adherent.id }}">
+                    DELETE
+                </button>
+                <!-- Modal de confirmation de suppression -->
+                <div class="modal fade" id="confirmDelete{{ adherent.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteLabel">Confirmation de suppression</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Êtes-vous sûr de vouloir supprimer cet adhérent ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <!-- Utilisez une méthode POST pour supprimer le livre -->
+                                <form action="{% url 'adherent_delete' adherent.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'emprunt/base.html' %}
+
+{% block content %}
+<table class='table table-borderless'>
+    <thead class='border-bottom font-weight-bold'>
+        <tr>
+             <td>ADHERENT</td>
+            <td>LIVRE</td>
+            <td>DATE D'EMPRUNT</td>
+            <td>DATE DE RETOUR </td>
+            <td>DATE DE RETOUR PREVUE</td>
+            <td>ACTIONS</td>
+            <td>
+                 <a href="{% url 'emprunt_insert' %}" class='btn btn-success btn-block btn-lg'>ADD</a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for emprunt in emprunt_list %}
+        <tr>
+            <td>{{ emprunt.adherent }}</td>
+            <td>{{ emprunt.livre }}</td>
+            <td>{{ emprunt.date_emprunt }}</td>
+            <td>{{ emprunt.date_retour }}</td>
+            <td>{{ emprunt.date_retour_prevue }}</td>
+            <td>
+                <a href="{% url 'emprunt_update' emprunt.id %}" class='btn btn-info btn-block'>Rendre</a>
+                <a href="{% url 'liste_emprunteurs_livre' emprunt.livre.id %}" class='btn btn-primary btn-block'>Emprunteurs</a> 
+                <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDelete{{ emprunt.id }}">
+                    DELETE
+                </button>
+                <!-- Modal de confirmation de suppression -->
+                <div class="modal fade" id="confirmDelete{{ emprunt.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteLabel">Confirmation de suppression</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Êtes-vous sûr de vouloir supprimer cet adhérent ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <!-- Utilisez une méthode POST pour supprimer le livre -->
+                                <form action="{% url 'emprunt_delete' emprunt.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

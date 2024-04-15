@@ -1,0 +1,37 @@
+{% extends 'auteur/base.html' %}
+
+{% block content %}
+<table class='table table-borderless'>
+    <thead class='border-bottom font-weight-bold'>
+        <tr>
+            <td>CODE</td>
+            <td>NOM</td>
+            <td>PRENOM</td>
+            <td>
+                 <a href="{% url 'auteur_insert' %}" class='btn btn-success btn-block btn-lg'>ADD</a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for auteurs in auteur_list %}
+        <tr>
+            <td>{{auteurs.code_auteur}}</td>
+            <td>{{auteurs.Nom_auteur}}</td>
+            <td>{{auteurs.Prenom_auteur}}</td>
+
+            <td>
+                <a href="{% url 'auteur_update' auteurs.id %}" class='btn btn-primary btn-block '>EDIT</a>
+            </br> 
+            <td>           
+            <form action="{% url 'auteur_delete' auteurs.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn btn-danger btn-block ">DELETE</button>
+            </form>
+            </td>
+            </td>
+            </tr>
+        
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

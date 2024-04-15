@@ -1,0 +1,29 @@
+{% extends 'emprunt/base.html' %}
+
+{% block content %}
+  <h2>Liste des emprunteurs du livre "{{ livre.Titre_livre }}"</h2>
+  <table class='table table-bordered'>
+    <thead>
+      <tr>
+        <th>Emprunteurs</th>
+        <th>Retardataires</th>
+        <th>Livres non retournés</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for  emprunt in  emprunts_retard  %}
+        <tr>
+          <td>{{ emprunt.adherent.nom_adh }} {{ emprunt.adherent.prenom_adh }}</td>
+          <td>{% if emprunt.retard %} Oui {% else %} Non {% endif %}</td>
+          <td>
+            {{ emprunt.livre.Titre_livre }}
+         </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">Aucun emprunt pour ce livre.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
