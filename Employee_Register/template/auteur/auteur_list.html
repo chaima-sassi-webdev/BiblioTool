@@ -1,37 +1,78 @@
 {% extends 'auteur/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-<table class='table table-borderless'>
-    <thead class='border-bottom font-weight-bold'>
-        <tr>
-            <td>CODE</td>
-            <td>NOM</td>
-            <td>PRENOM</td>
-            <td>
-                 <a href="{% url 'auteur_insert' %}" class='btn btn-success btn-block btn-lg'>ADD</a>
-            </td>
-        </tr>
-    </thead>
-    <tbody>
-        {% for auteurs in auteur_list %}
-        <tr>
-            <td>{{auteurs.code_auteur}}</td>
-            <td>{{auteurs.Nom_auteur}}</td>
-            <td>{{auteurs.Prenom_auteur}}</td>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <!-- Include any necessary CSS files here -->
+</head>
 
-            <td>
-                <a href="{% url 'auteur_update' auteurs.id %}" class='btn btn-primary btn-block '>EDIT</a>
-            </br> 
-            <td>           
-            <form action="{% url 'auteur_delete' auteurs.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" class="btn btn btn-danger btn-block ">DELETE</button>
-            </form>
-            </td>
-            </td>
+<body>
+
+
+    {% block content %}
+    <table class='table table-borderless'>
+        <thead class='border-bottom font-weight-bold'>
+            <tr>
+                <td>CODE</td>
+                <td>NOM</td>
+                <td>PRENOM</td>
+                <td>
+                    <a href="{% url 'auteur_insert' %}" class='btn btn-success btn-block btn-lg'>ADD</a>
+                </td>
             </tr>
-        
-        {% endfor %}
-    </tbody>
-</table>
-{% endblock %}
+        </thead>
+        <tbody>
+            {% for auteurs in auteur_list %}
+            <tr>
+                <td>{{auteurs.code_auteur}}</td>
+                <td>{{auteurs.Nom_auteur}}</td>
+                <td>{{auteurs.Prenom_auteur}}</td>
+
+                <td>
+                    <a href="{% url 'auteur_update' auteurs.id %}" class='btn btn-primary btn-block '>EDIT</a>
+                    <br>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#confirmDelete{{ auteurs.id }}">
+                    DELETE
+                </button>
+                <!-- Modal de confirmation de suppression -->
+                <div class="modal fade" id="confirmDelete{{ auteurs.id }}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteLabel">Confirmation de suppression</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Êtes-vous sûr de vouloir supprimer cet auteur ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                <!-- Utilisez une méthode POST pour supprimer le livre -->
+                                <form action="{% url 'auteur_delete' auteurs.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </td>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

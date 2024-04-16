@@ -1,19 +1,24 @@
 {% extends  'adherent/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.code_adh | as_crispy_field}}
-    {{ form.nom_adh | as_crispy_field}}
-    {{ form.nbrEmprunts_adh | as_crispy_field}}
+<div class="jumbotron">
+          <h1 class="display-4" align="center">Créer un adhérent</h1>
+          <p class="lead"></p>
+          <hr class="my-4">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.code_adh | as_crispy_field}}
+        {{ form.nom_adh | as_crispy_field}}
+        {{ form.nbrEmprunts_adh | as_crispy_field}}
 
-<div class='row'>
-    <div class='col-md-7'>
-        <button type='submit' class='btn btn-success btn-block btn-lg'>Submit</button>
+    <div class='row'>
+        <div class='col-md-7'>
+            <button type='submit' class='btn btn-success btn-block btn-lg'>Submit</button>
+        </div>
+        <div class='col-md-5'>
+            <a href="http://127.0.0.1:8000/adherent_list/" class='btn btn-secondary btn-block btn-lg'>Back To List</a>
+        </div>
     </div>
-    <div class='col-md-5'>
-        <a href="{% url 'adherent_list' %}" class='btn btn-secondary btn-block btn-lg'>Back To List</a>
-    </div>
+    </form>
 </div>
-</form>
 {% endblock %}

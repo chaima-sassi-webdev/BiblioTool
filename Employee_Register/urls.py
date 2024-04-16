@@ -5,22 +5,22 @@ urlpatterns = [
 
     path('', views.HOME, name='home'),
     path('FirstPage/', views.FirstPage, name='FirstPage'),
-    path('FirstPage/statistiques/', views.statistiques_view, name='statistiques'),
-    path('FirstPage/insert_auteur', views.auteur_form, name='auteur_insert'),
-    path('FirstPage/edit/<int:id>/',views.auteur_form, name='auteur_update'),
-    path('FirstPage/auteur_list',views.auteur_list, name='auteur_list'),   
-    path('FirstPage/delete/<int:id>/',views.auteur_delete, name='auteur_delete'),
+    path('statistiques/', views.statistiques_view, name='statistiques'),
+    path('insert_auteur/', views.auteur_form, name='auteur_insert'),
+    path('edit/<int:id>/',views.auteur_form, name='auteur_update'),
+    path('auteur_list/',views.auteur_list, name='auteur_list'),
+    path('auteur_delete/<int:id>/',views.auteur_delete, name='auteur_delete'),
 
-    path('FirstPage/livre/', views.livre_form, name='livre_insert'),
-    path('FirstPage/edit_livre/<int:id>/',views.livre_form, name='livre_update'),
-    path('FirstPage/delete_livre/<int:id>/', views.livre_delete, name='livre_delete'),  # Ajout de la barre oblique après 'delete'
-    path('FirstPage/livre_list',views.livre_list, name='livre_list'),
+    path('livre/', views.livre_form, name='livre_insert'),
+    path('edit_livre/<int:id>/',views.livre_form, name='livre_update'),
+    path('delete_livre/<int:id>/', views.livre_delete, name='livre_delete'),  # Ajout de la barre oblique après 'delete'
+    path('livre_list/',views.livre_list, name='livre_list'),
 
 
-    path('FirstPage/adherent/', views.adherent_form, name='adherent_insert'),
-    path('FirstPage/edit_adherent/<int:id>/',views.adherent_form, name='adherent_update'),
-    path('FirstPage/delete_adherent/<int:id>/', views.adherent_delete, name='adherent_delete'),  # Ajout de la barre oblique après 'delete'
-    path('FirstPage/adherent_list',views.adherent_list, name='adherent_list'),
+    path('adherent/', views.adherent_form, name='adherent_insert'),
+    path('edit_adherent/<int:id>/',views.adherent_form, name='adherent_update'),
+    path('adherent_delete/<int:id>/', views.adherent_delete, name='adherent_delete'),
+    path('adherent_list/',views.adherent_list, name='adherent_list'),
 
 
     path('emprunt/', views.Emprunt_form, name='emprunt_insert'),
